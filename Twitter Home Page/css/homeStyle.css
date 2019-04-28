@@ -34,6 +34,7 @@ header{
 }
 .header div .header-img{
 	margin-right:15px;
+	vertical-align:bottom;
 }
 .header-logout{ 
 	width:85px;
@@ -52,9 +53,9 @@ header{
 	background-color:#fff;
 }
 .header-header div button{
-	margin-left:15px;
 	position:relative;
 	top:-10px;
+	left:-100px;
 }
 .container{
 	display: flex;
@@ -76,7 +77,7 @@ aside{
 	margin-top:10px;
 	margin-bottom: 10px;	
 }
-.side-container-text-property{
+.text-property{
 	color:#7a797a;
 	font-size: 12px;
 	text-decoration: none;
@@ -122,6 +123,9 @@ aside{
 	font-weight:bold;
 	width:auto;
 }
+.side-container2-body span:nth-child(2){
+	font-size: 13px;
+}
 .side-container2-body{
 	margin-top:2px;
 	margin-bottom: 2px;
@@ -135,9 +139,8 @@ aside{
 	width:60px;
 	height:60px;
 }
-.side-container2-body .side-container-text-property{
+.side-container2-body .text-property{
 	padding-right: 40px;
-	padding-top: 5px;
 }
 .side-container2-body .button{
 	border-color: #18adee;
@@ -145,14 +148,17 @@ aside{
 	color:#18adee;
 	font-weight: bold;
 	margin-top: -25px;
-	margin-left:-15px;
+	margin-left:-50px;
 }
-.side-container2-footer .side-container-text-property{
+.side-container2-footer .text-property{
 	height: 20px;
 	padding:10px 75px;
 	border-bottom: none;
 }
-.side-container3 p, .side-container2-body-footer .side-container-text-property{
+.side-container2-footer{
+	padding: 7px 1px;
+}
+.side-container3 p, .side-container2-body-footer .text-property{
 	padding-left: 26px;
 }	
 .main{
@@ -191,6 +197,11 @@ aside{
 	padding: 10px;
 	display:flex;
 }
+.main-container-tweet{
+	background-color:#fff;
+	margin-top:10px;
+	margin-bottom: 10px;	
+}
 .main-container2-header span
 {
 	align-self:center;
@@ -204,6 +215,7 @@ aside{
 .main-container2-body{
 	font-size: 12px;
 	color: #222;
+	line-height: 2;
 }
 .main-container2-body, .main-container2-footer{
 	padding:5px 25px 10px 30px;
