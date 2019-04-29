@@ -20,7 +20,6 @@ function user_data(data){
 		following.textContent=data.stats.following;
 }
 
-
 var friend_suggestion_promise=fetch("https://fsd1.herokuapp.com/users/1/followers/suggestions");
 friend_suggestion_promise
 						.then(response=>response.json())
@@ -94,7 +93,7 @@ function tweet_data(data){
 				var mediaElem=document.createElement("video");
 						mediaElem.src=data[index].entities.media[0].link;
 						mediaElem.controls=true;
-						mediaElem.width="500";
+						mediaElem.className="tweet-video";
 						mediaElem.autoplay=true;
 						document.querySelector(".main-container2-body").appendChild(mediaElem);
 			} else if(data[index].entities.media[0].type==="image"){
@@ -121,4 +120,3 @@ function tweet_data(data){
 	  	}
 	}
 }
-
