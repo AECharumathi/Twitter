@@ -15,9 +15,8 @@ header{
 	display:flex;
 	justify-content: space-between;
 	padding-bottom:13px;
-	width: 50%;
+	width: 60%;
 	margin: 0 auto;
-	min-width: 890px;
 }
 .header span{
 	position:absolute;
@@ -51,16 +50,11 @@ header{
 	padding:4px 15px;
 	background-color:#fff;
 }
-.header-header div button{
-	position:relative;
-	top:-10px;
-	left:-100px;
-}
 .container{
 	display: flex;
 	flex-direction: row;
 	margin: 0 auto;
-	width:58%;
+	width:60%;
 	background-color: #eee;
 }
 aside{
@@ -138,7 +132,7 @@ aside{
 	height:60px;
 }
 .side-container2-body .text-property{
-	padding-right: 40px;
+	padding-right: 35px;
 }
 .side-container2-body .button{
 	border-color: #18adee;
@@ -192,7 +186,7 @@ aside{
 }
 .main-container2-header{
 	position:relative;
-	padding: 10px;
+	padding: 5px;
 	display:flex;
 }
 .main-container-tweet{
@@ -213,12 +207,12 @@ aside{
 .main-container2-body{
 	font-size: 12px;
 	color: #222;
-	line-height: 2;
+	line-height:3;
 }
 .main-container2-body, .main-container2-footer{
-	padding:5px 25px 10px 30px;
+	padding:2px 20px 3px 25px;
 }
-.main-container2-body .tweet-image{
+.tweet-image, .tweet-video{
 	width:100%;
 }
 .main-container2-footer {
@@ -230,8 +224,3 @@ aside{
 	padding: 10px;
 	vertical-align: middle;
 }
-.main-container2-footer span{
-	align-self: center;
-}
-.tweet-video{
-width:100%;

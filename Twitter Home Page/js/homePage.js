@@ -75,8 +75,9 @@ function tweet_data(data){
 	  element_span.textContent="@"+data[index].user.user_name;
 	  document.querySelector(".main-container2-header").appendChild(element_span);
 	  var element_span1=document.createElement("span");
+   	  var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
    	  var tweet_date=new Date(data[index].created_at);
-	  tweet_date = tweet_date.getDate()+"-"+ tweet_date.getMonth()+"-"+ tweet_date.getFullYear();
+	  tweet_date = tweet_date.getDate()+"-"+ monthNames[tweet_date.getMonth()]+"-"+ tweet_date.getFullYear();
 	  element_span1.textContent=tweet_date;
 	  element_span1.className="text-property";
 	  document.querySelector(".main-container2-header").appendChild(element_span1);
