@@ -8,7 +8,7 @@ body{
 }
 header{
 	height:250px;
-	padding:10px;
+	padding-bottom:10px;
 }
 .text-property{
 	color:#7a797a;
@@ -23,13 +23,15 @@ header{
 .header-header{
 	display:flex;
 	justify-content: space-between;
-	min-width: 890px;
 	background-color: #fff;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	height: 25px;
 }
 .header-header span{
 	position:absolute;
 	float: left;
-    margin-left:30px;
+    margin-left:3%;
     margin-top: 8px;
     padding: 0;
     font-weight: bold;
@@ -38,16 +40,16 @@ header{
 .header-img{
 	width:30px;
 	height:30px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
-.header-header div button{
-	margin-left:15px;
-	position:relative;
-	top:-10px;
+.header-header div img{
+	vertical-align: bottom;
 }
 .header-logout{ 
 	width:85px;
 	height:30px;
-	margin-right:20px;
+	margin-right:10px;
 }
 .header-header div span{
 	display:relative;
@@ -56,7 +58,7 @@ header{
 }
 .header-body{
 	background-color: #ccc;
-	height:175px;
+	height:165px;
 	display:flex;
 	justify-content: space-around;
 }
@@ -69,8 +71,9 @@ header{
 .header-footer{
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: space-between;
 	background-color: #fff;
+	height:20%;
 }
 .header-footer h3{
 	color: #7a797a;
@@ -88,7 +91,6 @@ header{
 .header-footer-body{
 	display:flex;
 	justify-content: space-between;
-	padding-left:42px;
 	font-size: 16px;
 }
 .header-footer-body span{
@@ -104,14 +106,12 @@ header{
 .container{
 	display: flex;
 	flex-direction: row;
-	width:75%;
+	width:60%;
 	margin: 0 auto;
 	background-color: #eee;
 }
 aside{
-	margin-left: 125px;
-    width:290px;
-    max-height: 700px;
+	width: 30%;
 }
 .side-container-common{
 	display:flex;
@@ -128,6 +128,7 @@ aside{
 .side-container img{
 	width:15px;
 	height:15px;
+	padding-right: 5px;
 }
 .side-container div div:nth-child(1){
 	margin-bottom:15px;	
@@ -143,14 +144,13 @@ aside{
 .side-container1-body{
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-around;
+	justify-content: flex-start;
+	margin: 10px;
 }
-.side-container1-body div{
-	width:72px;
-	height:72px;
-	background-color: #ccc;
-	margin-bottom: 5px;
-	margin-top:7px;
+.side-container1-body-div{
+	width:75px;
+	height:75px;
+	margin: 5px;
 }
 .side-container2 div:nth-child(1) , .side-container1-header, .side-container2-header{
 	border-bottom: 1px solid #7a797a;
@@ -159,9 +159,9 @@ aside{
 	padding:10px 5px;
 }
 .side-container2-header span:nth-child(1), .side-container2-body span:nth-child(2), .main-container2-header span:nth-child(2) {
-	font-size:17px;
 	font-weight:bold;
 	width:auto;
+	padding-left: 5px;
 }
 .side-container2-body{
 	margin-top:2px;
@@ -175,10 +175,12 @@ aside{
 .side-container2-body img{
 	width:60px;
 	height:60px;
+	vertical-align: middle;
 }
-.side-container2-body .side-container-text-property{
-	padding-right: 40px;
-	padding-top: 5px;
+.side-container2-body .text-property{
+	padding-right: 35px;
+	padding-top: 2px;
+	padding-left: 3px;
 }
 .side-container2-body .button{
 	border-color: #18adee;
@@ -186,20 +188,23 @@ aside{
 	color:#18adee;
 	font-weight: bold;
 	margin-top: -25px;
-	margin-left:-15px;
+	margin-left:-40px;
 }
-.side-container2-footer .side-container-text-property{
+.side-container2-footer .text-property{
 	height: 20px;
 	padding:10px 75px;
 	border-bottom: none;
 }
-.side-container3 p, .side-container2-body-footer .side-container-text-property{
+.side-container2-footer{
+	padding: 7px 1px;
+	text-align: center;
+}
+.side-container3 p{
 	padding-left: 26px;
 }	
-.main, #Following-container{
-	margin-left: 30px;
-	max-width:575px;
-	min-width: 560px;
+.main, #Following-container, #Followers-container{
+	margin-left: 25px;
+	width: 70%;
 }
 .main-container1{
 	background-color:#fff;
@@ -230,7 +235,7 @@ aside{
 }
 .main-container2-header{
 	position:relative;
-	padding: 10px;
+	padding: 5px;
 	display:flex;
 }
 .main-container2-header span
@@ -246,26 +251,13 @@ aside{
 .main-container2-body{
 	font-size: 12px;
 	color: #222;
+	line-height:3;
 }
 .main-container2-body, .main-container2-footer{
-	padding:5px 25px 10px 30px;
+	padding:2px 20px 3px 25px;
 }
-.main-container2-body .tweet-image{
+.tweet-image, .tweet-video{
 	width:100%;
-}
-.tweet-video{
-	position: relative;
-	border:1px solid #7a797a;
-	border-radius: 20px;
-}
-.tweet-video p{
-	padding-left: 10px;
-}
-#play-btn{
-	position:absolute;
-	top:50%;
-	left:50%;
-	transform: translate(-50%,-50%);
 }
 .main-container2-footer {
 	display:flex;
@@ -274,65 +266,57 @@ aside{
 }
 .main-container2-footer img{
 	padding: 10px;
+	vertical-align: middle;
 }
-.main-container2-footer span{
-	align-self: center;
-}
-#Following-container{
+#Following-container, #Followers-container{
 	display: flex;
 }
-#Following-container div .search-bar{
-	background-color: #f5f7f5;;
-	width:95%;
+#Following-container div .search-bar, #Followers-container div .search-bar{
+	background-color: #f5f7f5;
 	height:25px;
 	margin-top:10px;
 	margin-bottom: 10px; 
+	padding-left: 0px;
 }
-.Following-container1{
+.Following-container1 , .Followers-container1{
 	background-color: #fff;
 	height:220px;
-	width:262px;
+	width:45%;
 	justify-content: space-around;
 	margin-bottom: 20px;
 	margin-right: 25px;
 	flex-wrap: wrap;
 }
-.Following-container1-header{
-	background-color: #ccc;
-	height:100px;
-	display:flex;
-	justify-content: space-around;
+.Following-container1-padding, .Followers-container1-padding{
+	padding:5px;
+}
+.Following-container1-header, .Followers-container1-header{
+	width:100%;
 	border-radius: 10px;
 }
-.Following-container1-padding{
-	padding:10px;
-}
-.Following-container-body{
+.Following-container-body, .Followers-container-body{
 		display: flex;
 		flex-wrap: wrap;
 }
-.Following-container1-body{
+.Following-container1-padding div img, .Followers-container1-padding div img{
+	width:70px;
+	height:70px;
+	padding-right: 10px;
+}
+.Following-container1-body, .Followers-container1-body{
 	display: flex;
 	position: relative;
 	top:-25px;
 	padding: 0px 15px 0px 10px;
 }
-.Following-container1-body-inside span{
+.Following-container1-body-inside span, .Followers-container1-body-inside span{
      position:relative;
-     top:-15px;
+     top:-3px;
 }
-.Following-container1-body-inside h2{
+.Following-container1-body-inside h3, .Followers-container1-body-inside h3{
      position:relative;
-     top:5px;
+     top:10px;
 }
-.Following-container1-footer{
-	display: flex;
-	justify-content: space-around;
-	text-align: left;
+.Following-container1-footer, .Followers-container1-footer{
 	margin-top: -30px;
-}
-.Following-container1-footer h3{
-	color: #1DA1F2;
-	margin-top: -10px;
-	text-align: left;
 }
