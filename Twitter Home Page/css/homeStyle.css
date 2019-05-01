@@ -144,11 +144,11 @@ aside{
 }
 .side-container2-footer .text-property{
 	height: 20px;
-	padding:10px 75px;
 	border-bottom: none;
 }
 .side-container2-footer{
 	padding: 7px 1px;
+	text-align: center;
 }
 .side-container3 p, .side-container2-body-footer .text-property{
 	padding-left: 26px;

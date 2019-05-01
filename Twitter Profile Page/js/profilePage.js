@@ -1,9 +1,33 @@
-var user_promise=fetch("https://fsd1.herokuapp.com/users/1/details");
+var PromiseList=[ "https://fsd1.herokuapp.com/users/1/details",
+				  "https://fsd1.herokuapp.com/users/1/media",
+				  "https://fsd1.herokuapp.com/users/1/followers/suggestions",
+				  "https://fsd1.herokuapp.com/users/1/tweets",
+				  "https://fsd1.herokuapp.com/users/1/following",
+				  "https://fsd1.herokuapp.com/users/1/followers"
+				];
 
-user_promise
-		.then(response=>response.json())
-		.then(data=> user_data(data.data))
-		.catch(error=>console.log(error));
+var requests = PromiseList.map(url => fetch(url));
+
+		Promise.all(requests)
+			.then(responses=>responses)
+			.catch(error=>console.log(error));
+			
+function PromiseCall(url){
+	return fetch(url)
+			.then(response=>response.json())
+			.catch(error=>console.log(error));	
+}
+
+function TweetDate(month){
+	var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"]; 	
+		return `${monthNames[month]}`;
+}
+
+
+var list=0;
+
+PromiseCall(this.PromiseList[list])
+		.then(data=> user_data(data.data));
 
 function user_data(data){
 		document.querySelector(".header-footer div img")
@@ -17,27 +41,21 @@ function user_data(data){
 		document.querySelector(".user_name h2")
 						.textContent=data.full_name;
 		document.querySelector(".user_name span")
-						.textContent="@"+data.user_name;		
+						.textContent=`@ ${data.user_name}`;		
 	 	document.querySelector(".user_detail div:nth-child(2) span")
 	 					.textContent=data.user_from;
 	    document.querySelector(".user_detail div:nth-child(3) span")
 	 					.textContent=data.user_website;
-	 	var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 	 	var created=new Date(data.user_created_at);
-	    created = "Joined "+ monthNames[created.getMonth()]+" "+ created.getFullYear();
-	 	document.querySelector(".user_detail div:nth-child(4) span")
-	 					.textContent=created;
+	   		 	document.querySelector(".user_detail div:nth-child(4) span")
+	 					.textContent= `Joined ${TweetDate(created.getMonth())} ${created.getFullYear()}`;
 	 	var birthday=new Date(data.user_birthday);
-	    birthday = "Born "+monthNames[birthday.getMonth()]+" "+birthday.getDate()+", "+ birthday.getFullYear();
-	 	document.querySelector(".user_detail div:nth-child(5) span")
-	 					.textContent=birthday;
+	    	 	document.querySelector(".user_detail div:nth-child(5) span")
+	 					.textContent=`Born ${TweetDate(birthday.getMonth())} ${birthday.getDate()}, ${birthday.getFullYear()}`;
 }
 
-var user_media_promise=fetch("https://fsd1.herokuapp.com/users/1/media");
-user_media_promise
-				.then(response=>response.json())
-				.then(d=>user_media(d.data))
-				.catch(error=>console.log(error));
+PromiseCall(this.PromiseList[list+1])
+				.then(d=>user_media(d.data));
 
 function user_media(data){
 	var createMedia=[];
@@ -57,113 +75,101 @@ function user_media(data){
 	}
 }
 
-var friend_suggestion_promise=fetch("https://fsd1.herokuapp.com/users/1/followers/suggestions");
-friend_suggestion_promise
-						.then(response=>response.json())
-						.then(d=>friend_suggestion(d.data))
-						.catch(error=>console.log(error));
+PromiseCall(this.PromiseList[list+2])
+						.then(d=>friend_suggestion(d.data));
 						
 function friend_suggestion(data){
  	for(var index=0;index<data.length;index++){
  	  var element_div=document.createElement("div");
- 	  element_div.className="side-container2-body";
-	  document.querySelector("#side-container2").appendChild(element_div);
+ 	 	 element_div.className="side-container2-body";
+	  	 document.querySelector("#side-container2").appendChild(element_div);
  	  var element_image=document.createElement("img");
-	  element_image.src=data[index].profile_img;
-	  document.querySelector(".side-container2-body").appendChild(element_image);
+	  	  element_image.src=data[index].profile_img;
+	  	  document.querySelector(".side-container2-body").appendChild(element_image);
 	  var element_follow=document.createElement("span");
-	  element_follow.textContent=data[index].user_name;
-	  document.querySelector(".side-container2-body").appendChild(element_follow);	
+	  	  element_follow.textContent=data[index].user_name;
+	  	  document.querySelector(".side-container2-body").appendChild(element_follow);	
 	  var element_span=document.createElement("span");
-	  element_span.className="text-property";
-	  element_span.textContent=data[index].full_name;
-	  document.querySelector(".side-container2-body").appendChild(element_span);	
+	  	  element_span.className="text-property";
+	  	  element_span.textContent=data[index].full_name;
+	  	  document.querySelector(".side-container2-body").appendChild(element_span);	
 	  var element_button=document.createElement("button");
-	  element_button.className="button";
-	  element_button.textContent="Follow";
-	  document.querySelector(".side-container2-body").appendChild(element_button);
+	  	  element_button.className="button";
+	      element_button.textContent="Follow";
+	  	  document.querySelector(".side-container2-body").appendChild(element_button);
 	}
 }
 
-var tweet_promise=fetch("https://fsd1.herokuapp.com/users/1/tweets");
-
-tweet_promise
-			.then(response=>response.json())
-			.then(d=>tweet_data(d.data))
-			.catch(error=>console.log(error));
+PromiseCall(this.PromiseList[list+3])
+			.then(d=>tweet_data(d.data));
 
 function tweet_data(data){
 	for(var index=0;index<data.length;index++){
 	  var element_div_main=document.createElement("div");
  	  element_div_main.className="main-container2";
 	  document.querySelector(".main-container-tweet").appendChild(element_div_main);
-	  var element_div=document.createElement("div");
- 	  element_div.className="main-container2-header";
-	  document.querySelector(".main-container2").appendChild(element_div);
-	  var profile_image=document.createElement("img");
-	  profile_image.src="Images/avatar.png";
-	  profile_image.className="avatar"; 
-	  document.querySelector(".main-container2-header").appendChild(profile_image);
-	  var element_follow=document.createElement("span");
-	  element_follow.textContent=data[index].user.full_name;
-	  document.querySelector(".main-container2-header").appendChild(element_follow);	
-	  var element_span=document.createElement("span");
-	  element_span.className="text-property";
-	  element_span.textContent="@"+data[index].user.user_name;
-	  document.querySelector(".main-container2-header").appendChild(element_span);
-	  var element_span1=document.createElement("span");
-	  var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
-   	  var tweet_date=new Date(data[index].created_at);
-	  tweet_date = tweet_date.getDate()+"-"+ monthNames[tweet_date.getMonth()]+"-"+ tweet_date.getFullYear();
-	  element_span1.textContent=tweet_date;
-	  element_span1.className="text-property";
-	  document.querySelector(".main-container2-header").appendChild(element_span1);
-	  var toodle_img=document.createElement("img");
-	  toodle_img.src="Images/drop-down.png";
-	  toodle_img.className="dropdown-toodle"; 
-	  document.querySelector(".main-container2-header").appendChild(toodle_img);
-	  var element_div_body=document.createElement("div");
- 	  element_div_body.className="main-container2-body";
-	  element_div_body.textContent=data[index].text;
-	   document.querySelector(".main-container2").appendChild(element_div_body);
-		if(data[index].entities.hasOwnProperty('media')){
-			if(data[index].entities.media[0].type==="video"){
-				var mediaElem=document.createElement("video");
+	  	var element_div=document.createElement("div");
+ 	    element_div.className="main-container2-header";
+	    document.querySelector(".main-container2").appendChild(element_div);
+	  		var profile_image=document.createElement("img");
+	      	profile_image.src="Images/avatar.png";
+	      	profile_image.className="avatar"; 
+	      	document.querySelector(".main-container2-header").appendChild(profile_image);
+	  		var element_follow=document.createElement("span");
+	  	  	element_follow.textContent=data[index].user.full_name;
+	  	  	document.querySelector(".main-container2-header").appendChild(element_follow);	
+	  		var element_span=document.createElement("span");
+	  	  	element_span.className="text-property";
+	  	  	element_span.textContent=`@ ${data[index].user.user_name}`;
+	  	  	document.querySelector(".main-container2-header").appendChild(element_span);
+	  		var element_span1=document.createElement("span");
+	  	  	var tweet_date=new Date(data[index].created_at);
+	  			tweet_date = `${tweet_date.getDate()}-${TweetDate(tweet_date.getMonth())}-${tweet_date.getFullYear()}`;
+	  			element_span1.textContent=tweet_date;
+	  			element_span1.className="text-property";
+	  			document.querySelector(".main-container2-header").appendChild(element_span1);
+	  		var toodle_img=document.createElement("img");
+	  	  	toodle_img.src="Images/drop-down.png";
+	  	  	toodle_img.className="dropdown-toodle"; 
+	  	  	document.querySelector(".main-container2-header").appendChild(toodle_img);
+	  	var element_div_body=document.createElement("div");
+ 	  	element_div_body.className="main-container2-body";
+	  	element_div_body.textContent=data[index].text;
+	   	document.querySelector(".main-container2").appendChild(element_div_body);
+		 	if(data[index].entities.hasOwnProperty('media')){
+				if(data[index].entities.media[0].type==="video"){
+					var mediaElem=document.createElement("video");
 						mediaElem.src=data[index].entities.media[0].link;
 						mediaElem.controls=true;
 						mediaElem.className="tweet-video";
-						mediaElem.autoplay=true;
 						document.querySelector(".main-container2-body").appendChild(mediaElem);
-			} else if(data[index].entities.media[0].type==="image"){
-				var mediaElem=document.createElement("img");
+				} else if(data[index].entities.media[0].type==="image"){
+					var mediaElem=document.createElement("img");
 						mediaElem.src=data[index].entities.media[0].link;
 						document.querySelector(".main-container2-body").appendChild(mediaElem);
-			}
-		}
+				}
+		  	}
 		var imgSrc=["Images/comment.png", "Images/refresh.png", "Images/like.png"];
 		var footerImg=[];
 		var element_span_foot=[];
 		var imgValue=[data[index].stats.comments, data[index].stats.retweets, data[index].stats.likes];
-	  var element_div_foot=document.createElement("div");
- 	  element_div_foot.className="main-container2-footer";
- 	  document.querySelector(".main-container2").appendChild(element_div_foot);
- 	  element_span_foot=document.createElement("span");
- 	  element_span_foot.className="main-container2-footer-span"
- 	  document.querySelector(".main-container2-footer").appendChild(element_span_foot);
- 	   for(var s_index=0; s_index<3;s_index++){
- 	   		footerImg[s_index]=document.createElement("img");
-	  		footerImg[s_index].src=imgSrc[s_index];
-	  		document.querySelector(".main-container2-footer-span").appendChild(footerImg[s_index]);
-	  		document.querySelector(".main-container2-footer-span").appendChild(document.createTextNode(imgValue[s_index]));
-	  	}
+	  	var element_div_foot=document.createElement("div");
+ 	  		element_div_foot.className="main-container2-footer";
+ 	  		document.querySelector(".main-container2").appendChild(element_div_foot);
+ 	  		element_span_foot=document.createElement("span");
+ 	  		element_span_foot.className="main-container2-footer-span"
+ 	  		document.querySelector(".main-container2-footer").appendChild(element_span_foot);
+ 	   		for(var s_index=0; s_index<3;s_index++){
+ 	   			footerImg[s_index]=document.createElement("img");
+	  			footerImg[s_index].src=imgSrc[s_index];
+	  			document.querySelector(".main-container2-footer-span").appendChild(footerImg[s_index]);
+	  			document.querySelector(".main-container2-footer-span").appendChild(document.createTextNode(imgValue[s_index]));
+	  		}
 	}
 }
 
-var following_promise=fetch("https://fsd1.herokuapp.com/users/1/following");
-following_promise
-			.then(response=>response.json())
-			.then(d=>following_data(d.data))
-			.catch(error=>console.log(error));
+PromiseCall(this.PromiseList[list+4])
+			.then(d=>following_data(d.data));
 
 function following_data(data){
 	for(var index=0;index<data.length;index++){
@@ -191,7 +197,7 @@ function following_data(data){
 	  				document.querySelector(".Following-container1-body-inside").appendChild(element_span);
 	  				var element_span=document.createElement("span");
 	  				element_span.className="text-property";
-	  				element_span.textContent="@"+data[index].user_name;
+	  				element_span.textContent=`@ ${data[index].user_name}`;
 	  				document.querySelector(".Following-container1-body-inside").appendChild(element_span);
 	   		var div_body=document.createElement("div");
 	  		div_body.className="Following-container1-footer";
@@ -205,12 +211,8 @@ function following_data(data){
 	}
 }
 
-
-var followers_promise=fetch("https://fsd1.herokuapp.com/users/1/followers");
-followers_promise
-			.then(response=>response.json())
-			.then(d=>followers_data(d.data))
-			.catch(error=>console.log(error));
+PromiseCall(this.PromiseList[list+5])
+			.then(d=>followers_data(d.data));
 
 function followers_data(data){
 	for(var index=0;index<data.length;index++){
@@ -238,7 +240,7 @@ function followers_data(data){
 	  				document.querySelector(".Followers-container1-body-inside").appendChild(element_span);
 	  				var element_span=document.createElement("span");
 	  				element_span.className="text-property";
-	  				element_span.textContent="@"+data[index].user_name;
+	  				element_span.textContent=`@ ${data[index].user_name}`;
 	  				document.querySelector(".Followers-container1-body-inside").appendChild(element_span);
 	   		var div_body=document.createElement("div");
 	  		div_body.className="Followers-container1-footer";
