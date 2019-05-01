@@ -3,10 +3,12 @@ var PromiseList=[ "https://fsd1.herokuapp.com/users/1/details",
 				  "https://fsd1.herokuapp.com/users/1/tweets"
 				];
 
-var requests = PromiseList.map(url => fetch(url));
-
-		Promise.all(requests)
-			.then(responses=>responses)
+var  requests = PromiseList.map(url => fetch(url));
+var store=[];
+	Promise.all(requests)
+			.then(responses=>{
+				responses.forEach(response=>store.push(response.json()))
+			})
 			.catch(error=>console.log(error));
 			
 function PromiseCall(url){
@@ -40,7 +42,7 @@ var list=0;
 					.textContent=data.stats.following;
 	}
 
-	PromiseCall(this.PromiseList[list+1])
+	PromiseCall(this.PromiseList[++list])
 			.then(d=>friend_suggestion(d.data));
 			
 						
@@ -66,7 +68,7 @@ var list=0;
 		}
 	}
 
-	PromiseCall(this.PromiseList[list+2])
+	PromiseCall(this.PromiseList[++list])
 			.then(d=>tweet_data(d.data));
 			
 

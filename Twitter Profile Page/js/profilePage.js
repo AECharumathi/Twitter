@@ -5,11 +5,12 @@ var PromiseList=[ "https://fsd1.herokuapp.com/users/1/details",
 				  "https://fsd1.herokuapp.com/users/1/following",
 				  "https://fsd1.herokuapp.com/users/1/followers"
 				];
-
-var requests = PromiseList.map(url => fetch(url));
-
-		Promise.all(requests)
-			.then(responses=>responses)
+var  requests = PromiseList.map(url => fetch(url));
+var store=[];
+	Promise.all(requests)
+			.then(responses=>{
+				responses.forEach(response=>store.push(response.json()))
+			})
 			.catch(error=>console.log(error));
 			
 function PromiseCall(url){
@@ -54,7 +55,7 @@ function user_data(data){
 	 					.textContent=`Born ${TweetDate(birthday.getMonth())} ${birthday.getDate()}, ${birthday.getFullYear()}`;
 }
 
-PromiseCall(this.PromiseList[list+1])
+PromiseCall(this.PromiseList[++list])
 				.then(d=>user_media(d.data));
 
 function user_media(data){
@@ -75,7 +76,7 @@ function user_media(data){
 	}
 }
 
-PromiseCall(this.PromiseList[list+2])
+PromiseCall(this.PromiseList[++list])
 						.then(d=>friend_suggestion(d.data));
 						
 function friend_suggestion(data){
@@ -100,7 +101,7 @@ function friend_suggestion(data){
 	}
 }
 
-PromiseCall(this.PromiseList[list+3])
+PromiseCall(this.PromiseList[++list])
 			.then(d=>tweet_data(d.data));
 
 function tweet_data(data){
@@ -168,7 +169,7 @@ function tweet_data(data){
 	}
 }
 
-PromiseCall(this.PromiseList[list+4])
+PromiseCall(this.PromiseList[++list])
 			.then(d=>following_data(d.data));
 
 function following_data(data){
@@ -211,7 +212,7 @@ function following_data(data){
 	}
 }
 
-PromiseCall(this.PromiseList[list+5])
+PromiseCall(this.PromiseList[++list])
 			.then(d=>followers_data(d.data));
 
 function followers_data(data){
