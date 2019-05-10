@@ -45,28 +45,33 @@ var list=0;
 	PromiseCall(this.PromiseList[++list])
 			.then(d=>friend_suggestion(d.data));
 			
-						
+				
 	function friend_suggestion(data){
 		for(var index=0;index<data.length;index++){
-			var element_div=document.createElement("div");
-			element_div.className="side-container2-body";
-			document.querySelector(".side-container2-b").appendChild(element_div);
+		var element_div=document.createElement("div");
+		element_div.className="side-container2-body";
+		document.querySelector(".side-container2-b").appendChild(element_div);
+		}
+		var parentDiv=document.querySelectorAll(".side-container2-body");
+	
+		for(var index=0;index<data.length;index++){
 			var element_image=document.createElement("img");
 			element_image.src=data[index].profile_img;
-			document.querySelector(".side-container2-body").appendChild(element_image);
-			var element_follow=document.createElement("span");
-			element_follow.textContent=data[index].user_name;
-			document.querySelector(".side-container2-body").appendChild(element_follow);	
-			var element_span=document.createElement("span");
-			element_span.className="text-property";
-			element_span.textContent=data[index].full_name;
-			document.querySelector(".side-container2-body").appendChild(element_span);	
-			var element_button=document.createElement("button");
-			element_button.className="button";
-			element_button.textContent="Follow";
-			document.querySelector(".side-container2-body").appendChild(element_button);
+			parentDiv[index].appendChild(element_image);
+			var userName=document.createElement("span");
+			userName.textContent=data[index].user_name;
+			parentDiv[index].appendChild(userName);	
+			var fullName=document.createElement("span");
+			fullName.className="text-property";
+			fullName.textContent=data[index].full_name;
+			parentDiv[index].appendChild(fullName);	
+			var follow=document.createElement("button");
+			follow.className="button";
+			follow.textContent="Follow";
+			parentDiv[index].appendChild(follow);
 		}
 	}
+
 
 	PromiseCall(this.PromiseList[++list])
 			.then(d=>tweet_data(d.data));

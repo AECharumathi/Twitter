@@ -74,7 +74,7 @@ footer a{
 
 }
 .pop-content{
-	width: 20%;
+	width: 15%;
 	height:auto;
 	background-color: #fff;
 	position: absolute;
@@ -92,15 +92,17 @@ footer a{
 	font-weight:bold;
 	font-size:1rem;
 	display:inline;
-	padding-right:40px;
+	padding-right:30px;
 }
 .pop-body img{
 	margin-top:20px;
 }
 .close{
 	position: relative;
-	top:-18px;
-	color:red;
+	/*top:-10%;
+	color:red;*/
+	padding-right: 3px;
+    padding-bottom: 20px;
 }
 .circle{
     position: relative;
@@ -125,15 +127,15 @@ input{
 	padding: 6px 10px 6px 10px;
 	margin-top:12px;
 }
-.pop-body button{
-	border-radius:30px;
-	border: 0px;
-	color:#fff;
-	font-size:20px;
-	background-color: #18adde;
-	padding: 6px 45px 6px 45px;
-	margin-top:20px;
-	margin-bottom:10px;
+.btn_login{
+    border-radius: 30px;
+    border: 0px;
+    color: #fff;
+    font-size: 18px;
+    background-color: #18adde;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 30%;
 }
 label{
 	color:#000;
@@ -143,4 +145,8 @@ label{
 .login_footer{
 	color:#1a91da;
 	font-weight:bold;	
+}
+#warningMsg{
+	color:red;
+	font-size:12px;
 }
