@@ -50,6 +50,13 @@ header{
 	padding:4px 18px;
 	background-color:#fff;
 }
+span .button{
+	width: 20px;
+	height: 30px;
+	position: absolute;
+	top: 50%;
+	left:15%;
+}
 .container{
 	display: flex;
 	flex-direction: row;
