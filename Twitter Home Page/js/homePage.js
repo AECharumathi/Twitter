@@ -22,7 +22,6 @@ function TweetDate(month){
 		return `${monthNames[month]}`;
 }
 
-
 var list=0;
 	PromiseCall(this.PromiseList[list])
 			.then(data=> user_data(data.data));
@@ -79,7 +78,6 @@ var list=0;
 	PromiseCall(this.PromiseList[++list])
 			.then(d=>tweet_data(d.data));
 			
-
 	function tweet_data(data){
 		[].forEach.call(data,dataV=>{
 			var element_div_main=document.createElement("div");
@@ -136,7 +134,7 @@ var list=0;
 				element_span_foot=document.createElement("span");
 				element_span_foot.className="main-container2-footer-span"
 				document.querySelector(".main-container2-footer").appendChild(element_span_foot);
-                [].forEach.call(imgSrc,function(imgSrc,i){
+          [].forEach.call(imgSrc,function(imgSrc,i){
                     footerImg[i]=document.createElement("img");
                     footerImg[i].src=imgSrc;
 						document.querySelector(".main-container2-footer-span").appendChild(footerImg[i]);
