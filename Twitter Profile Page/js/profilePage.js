@@ -47,10 +47,10 @@ function user_data(data){
 	 					.textContent=data.user_from;
 	    document.querySelector(".user_detail div:nth-child(3) span")
 	 					.textContent=data.user_website;
-	 	var created=new Date(data.user_created_at);
+	 	let created=new Date(data.user_created_at);
 	   		 	document.querySelector(".user_detail div:nth-child(4) span")
 	 					.textContent= `Joined ${TweetDate(created.getMonth())} ${created.getFullYear()}`;
-	 	var birthday=new Date(data.user_birthday);
+	 	let birthday=new Date(data.user_birthday);
 	    	 	document.querySelector(".user_detail div:nth-child(5) span")
 	 					.textContent=`Born ${TweetDate(birthday.getMonth())} ${birthday.getDate()}, ${birthday.getFullYear()}`;
 }
@@ -59,7 +59,7 @@ PromiseCall(this.PromiseList[++list])
 				.then(d=>user_media(d.data));
 
 function user_media(data){
-	var createMedia=[];
+	let createMedia=[];
 	[].forEach.call(data,(mediaFile,i)=>{
 		if(mediaFile.type==="video"){
 				let mediaElem=document.createElement("video");
@@ -79,36 +79,60 @@ function user_media(data){
 PromiseCall(this.PromiseList[++list])
 						.then(d=>friend_suggestion(d.data));
 						
-function friend_suggestion(data){
-
-	[].forEach.call(data,()=>{
-		let element_div=document.createElement("div");
- 	 	element_div.className="side-container2-body";
-	  	document.querySelector("#side-container2").appendChild(element_div);
-	})
-	let parentDiv=document.querySelectorAll(".side-container2-body");
-	
-	[].forEach.call(parentDiv,(sug,i)=>{
-		[].forEach.call(data,(data,ind)=>{
-		   if(i==ind){
-	  			let element_image=document.createElement("img");
-	  	  		element_image.src=data.profile_img;
-	  	  		sug.appendChild(element_image);
-	  			let userName=document.createElement("span");
-	  	  		userName.textContent=data.user_name;
-	  	  		sug.appendChild(userName);	
-	  			let fullName=document.createElement("div");
-	  	  		fullName.className="text-property";
-	  	  		fullName.textContent=data.full_name;
-	  	  		sug.appendChild(fullName);	
-	  			let follow=document.createElement("button");
-	  	  		follow.className="button";
-	      		follow.textContent="Follow";
-				sug.appendChild(follow);
-		}
-	})
-  })
-}
+	function friend_suggestion(data){
+		[].forEach.call(data,()=>{
+			let suggest=document.createElement("div");
+			suggest.className="side-container2-body";
+			document.querySelector(".side-container2-b").appendChild(suggest);
+		});
+		let parentDiv=document.querySelectorAll(".side-container2-body");
+							
+		[].forEach.call(parentDiv,(parentDiv,i)=>{
+			let img_div=document.createElement("div");
+			let content_div=document.createElement("div");
+			parentDiv.appendChild(img_div);
+			parentDiv.appendChild(content_div);
+		});
+		let img_div=document.querySelectorAll(".side-container2-body div:nth-child(1)");
+		let content_div=document.querySelectorAll(".side-container2-body div:nth-child(2)");
+		[].forEach.call(img_div,(img_div,i)=>{
+			[].filter.call(data,(data,ind)=>{
+				if(i==ind){
+					let imageElem=document.createElement("img");
+					imageElem.src=data.profile_img;
+					img_div.appendChild(imageElem);
+				}
+			})
+		});
+		[].forEach.call(content_div,(content_div,i)=>{
+			let name_div=document.createElement("div");
+			let btn_div=document.createElement("div");
+			content_div.appendChild(name_div);
+			content_div.appendChild(btn_div);
+		});
+		let name_div=document.querySelectorAll(".side-container2-body div:nth-child(2) div:nth-child(1)");
+		let btn_div=document.querySelectorAll(".side-container2-body div:nth-child(2) div:nth-child(2)");
+		[].forEach.call(name_div,(name_div,i)=>{
+			[].filter.call(data,(data,ind)=>{
+			   if(i==ind){
+					let userName=document.createElement("span");
+					userName.textContent=data.user_name;
+					name_div.appendChild(userName);	
+					let fullName=document.createElement("span");
+					fullName.className="text-property";
+					fullName.textContent=`  ${data.full_name}`;
+					name_div.appendChild(fullName);	
+			   }
+			})
+		});
+		[].forEach.call(btn_div,(btn_div,i)=>{
+		    let follow=document.createElement("button");
+		    follow.className="button";
+			follow.textContent="Follow";
+			btn_div.appendChild(follow);
+		});
+					
+	}
 
 PromiseCall(this.PromiseList[++list])
 			.then(d=>tweet_data(d.data));
@@ -190,13 +214,13 @@ function following_data(data){
 	  let parentDiv=document.querySelectorAll(".Following-container1");
 	  
 	  [].forEach.call(parentDiv,(parent,i)=>{
-	  	var paddingDiv=document.createElement("div");
+	  	let paddingDiv=document.createElement("div");
 	  	paddingDiv.className="Following-container1-padding";
 	  	parent.appendChild(paddingDiv);
 		})
-	  var paddingDiv=document.querySelectorAll(".Following-container1-padding");
+	  let paddingDiv=document.querySelectorAll(".Following-container1-padding");
 	  [].forEach.call(paddingDiv,(padding,i)=>{
-	  if(data[i].cover_img!=""){
+	  	if(data[i].cover_img!=""){
 	  		let headerImg=document.createElement("img");
 	  		headerImg.src=data[i].cover_img;
 	  		headerImg.className="Following-container1-header";

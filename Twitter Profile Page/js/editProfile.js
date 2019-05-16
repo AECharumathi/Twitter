@@ -49,7 +49,7 @@ function editProfile(event){
 			let location=document.getElementById('location').value;
 			let bday=document.getElementById('bday').valueAsNumber;
 
-				var user={
+				let user={
 					user_name: user_name,
 					user_email: email,
 					user_birthday: bday, 
@@ -57,7 +57,7 @@ function editProfile(event){
 					user_website:url 
 				};
 				
-				var init = {
+				const init = {
 					method:'PUT',
 					body:JSON.stringify(user),
 					headers:{
