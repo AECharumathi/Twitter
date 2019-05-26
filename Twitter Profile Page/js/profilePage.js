@@ -13,14 +13,14 @@ let store=[];
 			})
 			.catch(error=>console.log(error));
 			
-function PromiseCall(url){
-	return fetch(url)
-			.then(response=>response.json())
-			.catch(error=>console.log(error));	
+async function PromiseCall(url){
+		let response= await fetch(url);
+		let data=await response.json();
+		return data;
 }
 
 function TweetDate(month){
-	let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"]; 	
+	const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"]; 	
 		return `${monthNames[month]}`;
 }
 
@@ -28,48 +28,53 @@ function TweetDate(month){
 var list=0;
 
 PromiseCall(this.PromiseList[list])
-		.then(data=> user_data(data.data));
+			.then(data=> user_data(data.data))
+			.catch(error=>console.log(error));
 
 function user_data(data){
+	const [profile_img,stats,full_name, user_name,user_from,user_website,user_created_at,user_birthday]=
+							[data.profile_img,data.stats,data.full_name,data.user_name,data.user_from,data.user_website,data.user_created_at,data.user_birthday];
 		document.querySelector(".header-footer div img")
-						.src=data.profile_img;
+						.src=profile_img;
 		document.querySelector(".header-footer-body span:nth-child(1) h3")
-						.textContent=data.stats.tweets;
+						.textContent=stats.tweets;
 		document.querySelector(".header-footer-body span:nth-child(2) h3")
-						.textContent=data.stats.following;
+						.textContent=stats.following;
 		document.querySelector(".header-footer-body span:nth-child(3) h3")
-						.textContent=data.stats.followers;
+						.textContent=stats.followers;
 		document.querySelector(".user_name h2")
-						.textContent=data.full_name;
+						.textContent=full_name;
 		document.querySelector(".user_name span")
-						.textContent=`@ ${data.user_name}`;		
+						.textContent=`@ ${user_name}`;		
 	 	document.querySelector(".user_detail div:nth-child(2) span")
-	 					.textContent=data.user_from;
+	 					.textContent=user_from;
 	    document.querySelector(".user_detail div:nth-child(3) span")
-	 					.textContent=data.user_website;
-	 	let created=new Date(data.user_created_at);
+	 					.textContent=user_website;
+	 	let created=new Date(user_created_at);
 	   		 	document.querySelector(".user_detail div:nth-child(4) span")
 	 					.textContent= `Joined ${TweetDate(created.getMonth())} ${created.getFullYear()}`;
-	 	let birthday=new Date(data.user_birthday);
+	 	let birthday=new Date(user_birthday);
 	    	 	document.querySelector(".user_detail div:nth-child(5) span")
 	 					.textContent=`Born ${TweetDate(birthday.getMonth())} ${birthday.getDate()}, ${birthday.getFullYear()}`;
 }
 
 PromiseCall(this.PromiseList[++list])
-				.then(d=>user_media(d.data));
+				.then(d=>user_media(d.data))
+				.catch(error=>console.log(error));
 
 function user_media(data){
-	let createMedia=[];
+	
 	[].forEach.call(data,(mediaFile,i)=>{
-		if(mediaFile.type==="video"){
+		let [mediaType,mediaUrl]=[mediaFile.type,mediaFile.url];
+		if(mediaType==="video"){
 				let mediaElem=document.createElement("video");
-						mediaElem.src=mediaFile.url;
+						mediaElem.src=mediaUrl;
 						mediaElem.className="side-container1-body-div";
 				  		document.querySelector(".side-container1-body").appendChild(mediaElem);
 			}
-		else if(mediaFile.type==="image"){
+		else if(mediaType==="image"){
 				let mediaElem=document.createElement("img");
-						mediaElem.src=mediaFile.url;
+						mediaElem.src=mediaUrl;
 						mediaElem.className="side-container1-body-div";
 						document.querySelector(".side-container1-body").appendChild(mediaElem);
 			}
@@ -77,8 +82,9 @@ function user_media(data){
 }
 
 PromiseCall(this.PromiseList[++list])
-						.then(d=>friend_suggestion(d.data));
-						
+						.then(d=>friend_suggestion(d.data))
+						.catch(error=>console.log(error));
+
 	function friend_suggestion(data){
 		[].forEach.call(data,()=>{
 			let suggest=document.createElement("div");
@@ -98,8 +104,9 @@ PromiseCall(this.PromiseList[++list])
 		[].forEach.call(img_div,(img_div,i)=>{
 			[].filter.call(data,(data,ind)=>{
 				if(i==ind){
+					const profile_img=data.profile_img;
 					let imageElem=document.createElement("img");
-					imageElem.src=data.profile_img;
+					imageElem.src=profile_img;
 					img_div.appendChild(imageElem);
 				}
 			})
@@ -115,12 +122,13 @@ PromiseCall(this.PromiseList[++list])
 		[].forEach.call(name_div,(name_div,i)=>{
 			[].filter.call(data,(data,ind)=>{
 			   if(i==ind){
+					const [user_name,full_name]=[data.user_name,data.full_name];
 					let userName=document.createElement("span");
-					userName.textContent=data.user_name;
+					userName.textContent=user_name;
 					name_div.appendChild(userName);	
 					let fullName=document.createElement("span");
 					fullName.className="text-property";
-					fullName.textContent=`  ${data.full_name}`;
+					fullName.textContent=`  ${full_name}`;
 					name_div.appendChild(fullName);	
 			   }
 			})
@@ -135,11 +143,13 @@ PromiseCall(this.PromiseList[++list])
 	}
 
 PromiseCall(this.PromiseList[++list])
-			.then(d=>tweet_data(d.data));
+			.then(d=>tweet_data(d.data))
+			.catch(error=>console.log(error));
 
 function tweet_data(data){
 	[].forEach.call(data,dataV=>{
-	  let div_main=document.createElement("div");
+		const [user,created_at,tweet_msg,entity,stats]=[dataV.user,dataV.created_at,dataV.text,dataV.entities,dataV.stats];
+		let div_main=document.createElement("div");
  	  div_main.className="main-container2";
 	  document.querySelector(".main-container-tweet").appendChild(div_main);
 	  	let header_div=document.createElement("div");
@@ -150,14 +160,14 @@ function tweet_data(data){
 	      	profile_image.className="avatar"; 
 	      	document.querySelector(".main-container2-header").appendChild(profile_image);
 	  		let element_follow=document.createElement("span");
-	  	  	element_follow.textContent=dataV.user.full_name;
+	  	  	element_follow.textContent=user.full_name;
 	  	  	document.querySelector(".main-container2-header").appendChild(element_follow);	
 	  		let element_span=document.createElement("span");
 	  	  	element_span.className="text-property";
-	  	  	element_span.textContent=`@ ${dataV.user.user_name}`;
+	  	  	element_span.textContent=`@ ${user.user_name}`;
 	  	  	document.querySelector(".main-container2-header").appendChild(element_span);
 	  		let element_span1=document.createElement("span");
-	  	  	let tweet_date=new Date(dataV.created_at);
+	  	  	let tweet_date=new Date(created_at);
 	  			tweet_date = `${tweet_date.getDate()}-${TweetDate(tweet_date.getMonth())}-${tweet_date.getFullYear()}`;
 	  			element_span1.textContent=tweet_date;
 	  			element_span1.className="text-property";
@@ -168,25 +178,25 @@ function tweet_data(data){
 	  	  	document.querySelector(".main-container2-header").appendChild(toodle_img);
 	  	let div_body=document.createElement("div");
  	  	div_body.className="main-container2-body";
-	  	div_body.textContent=dataV.text;
+	  	div_body.textContent=tweet_msg;
 	   	document.querySelector(".main-container2").appendChild(div_body);
-		 	if(dataV.entities.hasOwnProperty('media')){
-				if(dataV.entities.media[0].type==="video"){
+		 	if(entity.hasOwnProperty('media')){
+				if(entity.media[0].type==="video"){
 					let mediaElem=document.createElement("video");
-						mediaElem.src=dataV.entities.media[0].link;
+						mediaElem.src=entity.media[0].link;
 						mediaElem.controls=true;
 						mediaElem.className="tweet-video";
 						document.querySelector(".main-container2-body").appendChild(mediaElem);
-				} else if(dataV.entities.media[0].type==="image"){
+				} else if(entity.media[0].type==="image"){
 					let mediaElem=document.createElement("img");
-						mediaElem.src=dataV.entities.media[0].link;
+						mediaElem.src=entity.media[0].link;
 						document.querySelector(".main-container2-body").appendChild(mediaElem);
 				}
 		  	}
 		let imgSrc=["Images/comment.png", "Images/refresh.png", "Images/like.png"];
 		let footerImg=[];
 		let element_span_foot=[];
-		let imgValue=[dataV.stats.comments, dataV.stats.retweets, dataV.stats.likes];
+		let imgValue=[stats.comments, stats.retweets, stats.likes];
 	  	let element_div_foot=document.createElement("div");
  	  		element_div_foot.className="main-container2-footer";
  	  		document.querySelector(".main-container2").appendChild(element_div_foot);
@@ -203,7 +213,8 @@ function tweet_data(data){
 }
 
 PromiseCall(this.PromiseList[++list])
-			.then(d=>following_data(d.data));
+			.then(d=>following_data(d.data))
+			.catch(error=>console.log(error));
 
 function following_data(data){
 	[].forEach.call(data,dataV=>{
@@ -221,8 +232,9 @@ function following_data(data){
 	  let paddingDiv=document.querySelectorAll(".Following-container1-padding");
 	  [].forEach.call(paddingDiv,(padding,i)=>{
 	  	if(data[i].cover_img!=""){
+				let cover_img=data[i].cover_img;
 	  		let headerImg=document.createElement("img");
-	  		headerImg.src=data[i].cover_img;
+	  		headerImg.src=cover_img;
 	  		headerImg.className="Following-container1-header";
 	  		padding.appendChild(headerImg);
 			}
@@ -244,8 +256,9 @@ function following_data(data){
 	 [].forEach.call(body,(body,i)=>{
 		[].forEach.call(footer,(footer,ind)=>{
 		   if(i==ind){
+				 let profile_pic=data[i].profile_img;
 				let profile_img=document.createElement("img");
-	  			profile_img.src=data[i].profile_img;
+	  			profile_img.src=profile_pic;
 	  			body.appendChild(profile_img);
 	  			let body_in=document.createElement("div");
 	  			body_in.className="Following-container1-body-inside";
@@ -259,23 +272,25 @@ function following_data(data){
 	 [].forEach.call(body_in,(body_in,i)=>{
 		[].forEach.call(footerContent,(footc,ind)=>{
 		   if(i==ind){
+				 let [full_name,user_name,user_descrp]=[data[i].full_name,data[i].user_name,data[i].user_bio];
 			    	let fullName=document.createElement("h3");
-	  				fullName.textContent=data[i].full_name;
+	  				fullName.textContent=full_name;
 	  				body_in.appendChild(fullName);
 	  				let userName=document.createElement("span");
 	  				userName.className="text-property";
-	  				userName.textContent=`@ ${data[i].user_name}`;
+	  				userName.textContent=`@ ${user_name}`;
 	  				body_in.appendChild(userName);
 					let user_bio=document.createElement("p");
 	  				user_bio.className="text-property";
-	  				user_bio.textContent=data[i].user_bio;
+	  				user_bio.textContent=user_descrp;
 	  				footc.appendChild(user_bio);
 			}
 		})
 	})
 }
 PromiseCall(this.PromiseList[++list])
-			.then(d=>followers_data(d.data));
+			.then(d=>followers_data(d.data))
+			.catch(error=>console.log(error));
 
 function followers_data(data){
 	[].forEach.call(data,dataV=>{
@@ -293,8 +308,9 @@ function followers_data(data){
 	  let paddingDiv=document.querySelectorAll(".Followers-container1-padding");
 	  [].forEach.call(paddingDiv,(padding,i)=>{
 			if(data[i].cover_img!=""){
+				let cover_img=data[i].cover_img;
 	  		let headerImg=document.createElement("img");
-	  		headerImg.src=data[i].cover_img;
+	  		headerImg.src=cover_img;
 	  		headerImg.className="Followers-container1-header";
 	  		padding.appendChild(headerImg);
 			}
@@ -316,8 +332,9 @@ function followers_data(data){
 		[].forEach.call(body,(body,i)=>{
 		[].forEach.call(footer,(footer,ind)=>{
 		   if(i==ind){
+				 	let profile_pic=data[i].profile_img;
 			   	let profile_img=document.createElement("img");
-	  			profile_img.src=data[i].profile_img;
+	  			profile_img.src=profile_pic;
 	  			body.appendChild(profile_img);
 	  			let body_in=document.createElement("div");
 	  			body_in.className="Followers-container1-body-inside";
@@ -332,16 +349,17 @@ function followers_data(data){
 	 [].forEach.call(body_in,(body_in,i)=>{
 		[].forEach.call(footerContent,(footc,ind)=>{
 		   if(i==ind){
+				let [full_name,user_name,user_descrp]=[data[i].full_name,data[i].user_name,data[i].user_bio];
 				let fullName=document.createElement("h3");
-     			fullName.textContent=data[i].full_name;
+     			fullName.textContent=full_name;
 				body_in.appendChild(fullName);
 				let userName=document.createElement("span");
 	  			userName.className="text-property";
-	  			userName.textContent=`@ ${data[i].user_name}`;
+	  			userName.textContent=`@ ${user_name}`;
 	  			body_in.appendChild(userName);
 				let user_bio=document.createElement("p");
 	  			user_bio.className="text-property";
-	  			user_bio.textContent=data[i].user_bio;
+	  			user_bio.textContent=user_descrp;
 	  			footc.appendChild(user_bio);
 			}
 		})

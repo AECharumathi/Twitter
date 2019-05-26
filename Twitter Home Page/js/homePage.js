@@ -11,10 +11,10 @@ let store=[];
 			})
 			.catch(error=>console.log(error));
 			
-function PromiseCall(url){
-	return fetch(url)
-			.then(response=>response.json())
-			.catch(error=>console.log(error));	
+async function PromiseCall(url){
+	let response= await fetch(url);
+	let data=await response.json();
+	return data;
 }
 
 function TweetDate(month){
@@ -24,26 +24,28 @@ function TweetDate(month){
 
 let list=0;
 	PromiseCall(this.PromiseList[list])
-			.then(data=> user_data(data.data));
+			.then(data=> user_data(data.data))
+			.catch(error=>console.log(error));
 			
 	function user_data(data){
+		const [full_name, user_name,profile_img,stats]=[data.full_name,data.user_name,data.profile_img,data.stats];
 	    document.querySelector("#side-container1-body-inside h2")
-					.textContent=data.full_name;
+					.textContent=full_name;
 		document.querySelector("#side-container1-body-inside span")
-					.textContent=`@ ${data.user_name}`;
+					.textContent=`@ ${user_name}`;
 		document.querySelector("#side-container1-body img")
-					.src=data.profile_img;
+					.src=profile_img;
 		document.querySelector("#side-container1-footer div:nth-child(1) h3")
-					.textContent=data.stats.tweets;
+					.textContent=stats.tweets;
 		document.querySelector("#side-container1-footer div:nth-child(2) h3")
-					.textContent=data.stats.followers;
+					.textContent=stats.followers;
 		document.querySelector("#side-container1-footer div:nth-child(3) h3")
-					.textContent=data.stats.following;
+					.textContent=stats.following;
 	}
 
 	PromiseCall(this.PromiseList[++list])
-			.then(d=>friend_suggestion(d.data));
-			
+			.then(d=>friend_suggestion(d.data))
+			.catch(error=>console.log(error));
 				
 	function friend_suggestion(data){
 		[].forEach.call(data,()=>{
@@ -64,8 +66,9 @@ let list=0;
 		 [].forEach.call(img_div,(img_div,i)=>{
 			 [].filter.call(data,(data,ind)=>{
                     if(i==ind){
+						const profile_img=data.profile_img;
                         let imageElem=document.createElement("img");
-                        imageElem.src=data.profile_img;
+                        imageElem.src=profile_img;
 						img_div.appendChild(imageElem);
 					}
 				})
@@ -83,12 +86,13 @@ let list=0;
 		[].forEach.call(name_div,(name_div,i)=>{
 			[].filter.call(data,(data,ind)=>{
 				   if(i==ind){
+						const [user_name,full_name]=[data.user_name,data.full_name];
                         let userName=document.createElement("span");
-                        userName.textContent=data.user_name;
+                        userName.textContent=user_name;
 						name_div.appendChild(userName);	
 				        let fullName=document.createElement("span");
 						fullName.className="text-property";
-						fullName.textContent=`  ${data.full_name}`;
+						fullName.textContent=`  ${full_name}`;
 						name_div.appendChild(fullName);	
 				   }
 				})
@@ -99,14 +103,15 @@ let list=0;
                   follow.textContent="Follow";
                   btn_div.appendChild(follow);
             });
-
     }
 
 	PromiseCall(this.PromiseList[++list])
-			.then(d=>tweet_data(d.data));
+			.then(d=>tweet_data(d.data))
+			.catch(error=>console.log(error));
 			
 	function tweet_data(data){
 		[].forEach.call(data,dataV=>{
+			const [user,created_at,tweet_msg,entity,stats]=[dataV.user,dataV.created_at,dataV.text,dataV.entities,dataV.stats];
 			let element_div_main=document.createElement("div");
 			element_div_main.className="main-container2";
 			document.querySelector(".main-container-tweet").appendChild(element_div_main);
@@ -118,14 +123,14 @@ let list=0;
 					profile_image.className="avatar"; 
 					document.querySelector(".main-container2-header").appendChild(profile_image);
 					let element_follow=document.createElement("span");
-					element_follow.textContent=dataV.user.full_name;
+					element_follow.textContent=user.full_name;
 					document.querySelector(".main-container2-header").appendChild(element_follow);	
 					let element_span=document.createElement("span");
 					element_span.className="text-property";
-					element_span.textContent=`@ ${dataV.user.user_name}`;
+					element_span.textContent=`@ ${user.user_name}`;
 					document.querySelector(".main-container2-header").appendChild(element_span);
 					let element_span1=document.createElement("span");
-					let tweet_date=new Date(dataV.created_at);
+					let tweet_date=new Date(created_at);
 	  				element_span1.textContent=`${tweet_date.getDate()}-${TweetDate(tweet_date.getMonth())}-${tweet_date.getFullYear()}`;
 	  				element_span1.className="text-property";
 					document.querySelector(".main-container2-header").appendChild(element_span1);
@@ -135,26 +140,26 @@ let list=0;
 					document.querySelector(".main-container2-header").appendChild(toodle_img);
 				let element_div_body=document.createElement("div");
 				element_div_body.className="main-container2-body";
-				element_div_body.textContent=dataV.text;
+				element_div_body.textContent=tweet_msg;
 				document.querySelector(".main-container2").appendChild(element_div_body);
-					if(dataV.entities.hasOwnProperty('media')){
-						if(dataV.entities.media[0].type==="video"){
+					if(entity.hasOwnProperty('media')){
+						if(entity.media[0].type==="video"){
 							let mediaElem=document.createElement("video");
-							mediaElem.src=dataV.entities.media[0].link;
+							mediaElem.src=entity.media[0].link;
 							mediaElem.controls=true;
 							mediaElem.className="tweet-video";
 							document.querySelector(".main-container2-body").appendChild(mediaElem);
 						}
-						else if(dataV.entities.media[0].type==="image"){
+						else if(entity.media[0].type==="image"){
 							let mediaElem=document.createElement("img");
-							mediaElem.src=dataV.entities.media[0].link;
+							mediaElem.src=entity.media[0].link;
 							document.querySelector(".main-container2-body").appendChild(mediaElem);
 						}
 					}
 			let imgSrc=["Images/comment.png", "Images/refresh.png", "Images/like.png"];
 			let footerImg=[];
 			let element_span_foot=[];
-			let imgValue=[dataV.stats.comments, dataV.stats.retweets, dataV.stats.likes];
+			let imgValue=[stats.comments, stats.retweets, stats.likes];
 			let element_div_foot=document.createElement("div");
 			element_div_foot.className="main-container2-footer";
 			document.querySelector(".main-container2").appendChild(element_div_foot);

@@ -8,10 +8,16 @@ let store=[];
 			})
 			.catch(error=>console.log(error));
 			
-function PromiseCall(url){
-	return fetch(url)
-			.then(response=>response.json())
-			.catch(error=>console.log(error));	
+async function PromiseCall(url){
+	let response= await fetch(url);
+	let data=await response.json();
+	return data;
+}
+
+async function response(url,init){
+	let PromiseCall=await fetch(url,init);
+	let data=await PromiseCall.json()
+	return data;
 }
 
 function TweetDate(month){
@@ -23,7 +29,8 @@ function TweetDate(month){
 var list=0;
 
 PromiseCall(this.PromiseList[list])
-		.then(data=> user_data(data.data));
+		.then(data=> user_data(data.data))
+		.catch(error=>console.log(error));	
 
 function user_data(data){
 		document.querySelector(".header-footer-body span:nth-child(1) h3")
@@ -64,15 +71,14 @@ function editProfile(event){
 						'Content-Type':'application/json'
 					}
 				}
-		let PromiseCall=fetch("https://fsd1.herokuapp.com/users/4/profile",init);
-			PromiseCall.then(response=>response.json())
+		respnse("https://fsd1.herokuapp.com/users/4/profile",init)
 			.then(data=>{
 				if((user.user_name==data.user_name)&&(user.user_email==data.user_email)&&(user.user_birthday==data.user_birthday)&&(user.user_from==data.user_from)&&(user.user_website==data.user_website)){
 					document.getElementById("warningMsg").textContent="No change";
 				}
 				else{
 					if(data.status!="success"){
-						document.getElementById("warningMsg").textContent=data.message;
+						document.getElementById("warningMsg").textContent=`Please enter proper value`;
 					}
 					else{
 						document.getElementById("warningMsg").textContent=data.message;
