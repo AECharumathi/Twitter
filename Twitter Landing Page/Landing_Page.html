@@ -42,7 +42,7 @@
         				<div class="text">ADD PHOTO</div>
     			</div>
 				<form name="signupForm" onsubmit="return signUp(event)" method="post">
-					<span id="warningMsg"></span>
+					<span id="signUPWarningMsg"></span>
 					<input type="text" name="username" minlength="6" placeholder="User name" id="username" required>
 					<input type="email" name="emailId" placeholder="Email Address" id="emailId" required>
 					<input type="password" name="passwd" minlength="6" placeholder="Password" id="passwd" required>
@@ -59,7 +59,7 @@
 			<span class="close" onclick="closeDialog()"><img src="Images/close.png"></span>
 			<div class="pop-body">
 				<form name="loginForm" onsubmit="return loginMsg(event,document.getElementById('loginEmail'),document.getElementById('loginPassword'))" method="post">
-					<span id="warningMsg"></span>
+					<span id="loginWarningMsg"></span>
 					<input type="email" name="email" placeholder="Email Address" id="loginEmail"/>
 					<input type="password" name="password" placeholder="Password" id="loginPassword"/>
 					<br/>

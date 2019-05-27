@@ -1,3 +1,99 @@
+class User{
+	constructor(id, profile_img, cover_img, full_name, user_bio, user_name, user_email,following,stats){
+			this._id=id;
+			this._profile_img=profile_img;
+			this._cover_img=cover_img;
+			this._full_name=full_name;
+			this._user_bio=user_bio;
+			this._user_name=user_name;
+			this._user_email=user_email;
+			this._following=following;
+			this._stats=stats;
+	}
+	get	id(){
+	return this._id;
+}
+ set id(id){
+			this._id=id;
+	}
+get	profile_img	()	{
+	return this._profile_img;
+}
+	set profile_img(profile_img){
+			this._profile_img=profile_img;
+	}
+get	cover_img()	{
+	return this._cover_img;
+}
+	set cover_img(cover_img){
+			this._cover_img=cover_img;
+	}
+get	full_name()	{
+	return this._full_name;
+}
+	set full_name(full_name){
+			this._full_name=full_name;
+	}
+get	user_bio()	{
+	return this._user_bio;
+}
+	set user_bio(user_bio){
+			this._user_bio=user_bio;
+	}
+get	user_name()	{
+	return `@ ${this._user_name}`;
+}
+	set user_name(user_name){
+			this._user_name=user_name;
+	}
+get	user_email	()	{
+	return  this._user_email;
+}
+	set user_email(user_email){
+			this._user_email=user_email;
+	}
+get	following	()	{
+	return this._following;
+}
+	set following(following){
+			this._following=following;
+	}
+get	stats()	{
+	return this._stats;
+}
+	set stats(stats){
+			this._stats=stats;
+	}
+}
+
+class Stats extends User{
+	constructor(tweets,followers, followings){
+			super();
+			this._tweets= tweets;
+			this._followers=followers;
+			this._followings= followings;
+	}
+	get tweets(){
+			return this._tweets;
+	}
+set tweets(tweets){
+	this._tweets= tweets;
+}
+	get followers(){
+	return this._followers;
+	}
+set followers(followers){
+			 this._followers=followers;
+	}
+	get  followings(){
+		 return  this._followings;
+	}
+set followings(followings){
+		 this._followings= followings;
+	}
+
+}
+
 var PromiseList=[ "https://fsd1.herokuapp.com/users/1/details",
 				  "https://fsd1.herokuapp.com/users/1/media",
 				  "https://fsd1.herokuapp.com/users/1/followers/suggestions",
@@ -12,7 +108,9 @@ let store=[];
 				responses.forEach(response=>store.push(response.json()))
 			})
 			.catch(error=>console.log(error));
-			
+
+
+
 async function PromiseCall(url){
 		let response= await fetch(url);
 		let data=await response.json();
@@ -32,20 +130,22 @@ PromiseCall(this.PromiseList[list])
 			.catch(error=>console.log(error));
 
 function user_data(data){
-	const [profile_img,stats,full_name, user_name,user_from,user_website,user_created_at,user_birthday]=
-							[data.profile_img,data.stats,data.full_name,data.user_name,data.user_from,data.user_website,data.user_created_at,data.user_birthday];
+	const [tweets,followings,followers,profile_img,cover_img,full_name,user_bio, user_name,user_email,user_from,user_website,user_created_at,user_birthday,following,id,stats]=
+							[data.stats.tweets,data.stats.following,data.stats.followers,data.profile_img,data.cover_img,data.full_name,data.user_bio,data.user_name,data.email,data.user_from,data.user_website,data.user_created_at,data.user_birthday,data.following,data.id,data.stats];
+							let user = new User(id, profile_img, cover_img, full_name, user_bio, user_name, user_email,following, stats);
+							let stat=new Stats(tweets,followings,followers);
 		document.querySelector(".header-footer div img")
-						.src=profile_img;
+						.src=user.profile_img;
 		document.querySelector(".header-footer-body span:nth-child(1) h3")
-						.textContent=stats.tweets;
+						.textContent=stat.tweets;
 		document.querySelector(".header-footer-body span:nth-child(2) h3")
-						.textContent=stats.following;
+						.textContent=stat.followings;
 		document.querySelector(".header-footer-body span:nth-child(3) h3")
-						.textContent=stats.followers;
+						.textContent=stat.followers;
 		document.querySelector(".user_name h2")
-						.textContent=full_name;
+						.textContent=user.full_name;
 		document.querySelector(".user_name span")
-						.textContent=`@ ${user_name}`;		
+						.textContent=user.user_name;	
 	 	document.querySelector(".user_detail div:nth-child(2) span")
 	 					.textContent=user_from;
 	    document.querySelector(".user_detail div:nth-child(3) span")

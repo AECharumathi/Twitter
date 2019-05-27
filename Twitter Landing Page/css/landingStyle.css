@@ -146,7 +146,7 @@ label{
 	color:#1a91da;
 	font-weight:bold;	
 }
-#warningMsg{
+#signUPWarningMsg, #loginWarningMsg{
 	color:red;
 	font-size:12px;
 }

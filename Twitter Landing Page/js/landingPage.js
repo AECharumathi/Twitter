@@ -27,7 +27,7 @@ function loginMsg(event,email,password){
     response("https://fsd1.herokuapp.com/users/login",init)
    .then(data=>{
             if(data.status!="success"){
-                document.getElementById("warningMsg").textContent=data.message;
+                document.getElementById("loginWarningMsg").textContent="Enter valid credentials";
             }
             else{
                 window.location.href="../Twitter Home Page/home.html";
@@ -61,10 +61,10 @@ async function signUp(event){
         response("https://fsd1.herokuapp.com/users/create",init)
             .then(data=>{
                         if(data.status!="success"){
-                            document.getElementById("warningMsg").textContent=data.message;
+                            document.getElementById("signUPWarningMsg").textContent=data.message;
                         }
                         else{
-                            document.getElementById("warningMsg").textContent=data.message;
+                            document.getElementById("signUPWarningMsg").textContent=data.message;
                         }
             })
             .catch(error=>console.log(error));
