@@ -31,6 +31,9 @@ header{
 	width:30px;
 	height:30px;
 }
+.header div a{
+	text-decoration: none;
+}
 .header div .header-img{
 	margin-right:15px;
 	vertical-align:bottom;
