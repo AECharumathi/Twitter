@@ -235,3 +235,34 @@ aside{
 	padding: 10px;
 	vertical-align: middle;
 }
+@media only screen and (max-width: 600px) {
+	
+	aside{
+		display:none;
+	}
+	.header {
+		width: 89%;
+		margin: 0 auto;
+	}
+	.header-img {
+		padding-left: 15px;
+	}
+	.header span {
+		margin-left: 47px;
+	}
+	.container {
+		width: 90%;
+	}
+	.text-property {
+		font-size: 10px;
+	}
+	body{
+		font-size:13px;
+	}	
+	.main-container2-header span:nth-child(2) {
+		font-size: 13px;
+	}
+	.main{
+		width:100%;
+	}
+} 

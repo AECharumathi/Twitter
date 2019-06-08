@@ -362,3 +362,75 @@ aside{
     width: 60%;
 	font-size:14px;
 }
+@media only screen and (max-width: 600px) {
+	
+	aside{
+		display:none;
+	}
+	body{
+		font-size:13px;
+	}
+	header{
+		height:200px;
+		padding-bottom:10px;
+	}
+	.header-header {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		height: 20px;
+	}
+	.header-header span {
+		margin-left: 8%;
+	}
+	.header-img {
+		width: 25px;
+		height: 25px;
+		padding-left: 15px;
+		padding-right: 10px;
+	}
+	.header-body{
+		height:125px;
+	}
+	.header-footer div img {
+		width: 80px;
+		height: 80px;
+		margin-top: -5px;
+	}
+	.header-footer-body span {
+		padding-right: 10px;
+	}
+	.header-footer h3 {
+		font-size: 14px;
+	}
+	.header-footer div button {
+		width: 75px;
+		height: 30px;
+		margin-top: 2px;
+	}
+	.header-logout{ 
+		width:75px;
+		height:21px;
+		margin-right:10px;
+	}
+	.button {
+		padding:2px 10px;
+		margin-top: 2px;
+	}
+	.text-property {
+		font-size: 10px;
+	}
+	.container, .header{
+		width: 90%;
+	}
+	#Tweet-container, #Following-container, #Followers-container{
+		width:100%;
+		margin:0;
+	}
+	.Following-container1-header, .Followers-container1-header {
+		height: 100px;
+	}
+	.Following-container1-body-inside h3, .Followers-container1-body-inside h3 {
+		position: relative;
+		top: 10px;
+	}
+} 
