@@ -31,6 +31,9 @@ header{
 	width:30px;
 	height:30px;
 }
+.header div a{
+	text-decoration: none;
+}
 .header div .header-img{
 	margin-right:15px;
 	vertical-align:bottom;
@@ -47,8 +50,15 @@ header{
 .button{
 	border: 1px solid gray;
 	border-radius: 30px;
-	padding:4px 15px;
+	padding:4px 18px;
 	background-color:#fff;
+}
+span .button{
+	width: 20px;
+	height: 30px;
+	position: absolute;
+	top: 50%;
+	left:15%;
 }
 .container{
 	display: flex;
@@ -103,44 +113,45 @@ aside{
 	margin-top: -10px;
 	text-align: left;
 }
-.side-container2 div:nth-child(1){
-	border-bottom: 1px solid #7a797a;
+.side-container2-body div:nth-child(2){
+	flex-direction: column;
 }
 .side-container2-header{
 	padding:10px 5px;
 	border-bottom: 1px solid #7a797a;
 }
-.side-container2-header span:nth-child(1), .side-container2-body span:nth-child(2), .main-container2-header span:nth-child(2) {
+.side-container2-header span:nth-child(1), .side-container2-body div span:nth-child(1), .main-container2-header span:nth-child(2) {
 	font-size:17px;
 	font-weight:bold;
 	width:auto;
 }
-.side-container2-body span:nth-child(2){
+.side-container2-body div span:nth-child(1){
 	font-size: 13px;
 }
 .side-container2-body{
 	margin-top:2px;
 	margin-bottom: 2px;
-	justify-content: space-around;
 	padding:5px;
 	display:flex;
-	flex-wrap: wrap;
 	border-bottom: 1px solid #7a797a;
 }
-.side-container2-body img{
+.side-container2-body div:nth-child(1) img{
 	width:60px;
 	height:60px;
 }
-.side-container2-body .text-property{
-	padding-right: 35px;
+.side-container2-body div{
+	padding-right:10px;
 }
-.side-container2-body .button{
+.side-container2-body div:nth-child(2) div:nth-child(1){
+	padding-left:5px;
+	flex-wrap: wrap;
+}
+.side-container2-body div:nth-child(2) div:nth-child(2) .button{
 	border-color: #18adee;
 	background-color: #fff;
 	color:#18adee;
 	font-weight: bold;
-	margin-top: -25px;
-	margin-left:-50px;
+	margin-top: 10px;
 }
 .side-container2-footer .text-property{
 	height: 20px;
@@ -224,3 +235,34 @@ aside{
 	padding: 10px;
 	vertical-align: middle;
 }
+@media only screen and (max-width: 600px) {
+	
+	aside{
+		display:none;
+	}
+	.header {
+		width: 89%;
+		margin: 0 auto;
+	}
+	.header-img {
+		padding-left: 15px;
+	}
+	.header span {
+		margin-left: 47px;
+	}
+	.container {
+		width: 90%;
+	}
+	.text-property {
+		font-size: 10px;
+	}
+	body{
+		font-size:13px;
+	}	
+	.main-container2-header span:nth-child(2) {
+		font-size: 13px;
+	}
+	.main{
+		width:100%;
+	}
+} 

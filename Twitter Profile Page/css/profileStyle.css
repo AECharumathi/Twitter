@@ -116,7 +116,6 @@ aside{
 .side-container-common{
 	display:flex;
 	background-color: #fff;
-	width:280px;
 	flex-direction: column;
 	margin-top:10px;
 	margin-bottom: 10px;	
@@ -148,51 +147,43 @@ aside{
 	margin: 10px;
 }
 .side-container1-body-div{
-	width:75px;
-	height:75px;
+	width:80px;
+	height:80px;
 	margin: 5px;
 }
-.side-container2 div:nth-child(1) , .side-container1-header, .side-container2-header{
+.side-container1-header, .side-container2-header{
 	border-bottom: 1px solid #7a797a;
 }
 .side-container2-header{
 	padding:10px 5px;
 }
-.side-container2-header span:nth-child(1), .side-container2-body span:nth-child(2), .main-container2-header span:nth-child(2) {
+.side-container2-header span:nth-child(1), .side-container2-body div span:nth-child(1), .main-container2-header span:nth-child(2) {
 	font-weight:bold;
 	width:auto;
-	padding-left: 5px;
 }
 .side-container2-body{
 	margin-top:2px;
 	margin-bottom: 2px;
-	justify-content: space-around;
 	padding:5px;
 	display:flex;
-	flex-wrap: wrap;
 	border-bottom: 1px solid #7a797a;
 }
-.side-container2-body img{
+.side-container2-body div{
+	margin-left:5px;
+}
+.side-container2-body div:nth-child(1) img{
 	width:60px;
 	height:60px;
-	vertical-align: middle;
 }
-.side-container2-body .text-property{
-	padding-right: 35px;
-	padding-top: 2px;
-	padding-left: 3px;
-}
-.side-container2-body .button{
+.side-container2-body div:nth-child(2) div:nth-child(2) .button{
 	border-color: #18adee;
 	background-color: #fff;
 	color:#18adee;
 	font-weight: bold;
-	margin-top: -25px;
-	margin-left:-40px;
+	margin-top: 10px;
 }
 .side-container2-footer .text-property{
 	height: 20px;
-	padding:10px 75px;
 	border-bottom: none;
 }
 .side-container2-footer{
@@ -280,11 +271,9 @@ aside{
 }
 .Following-container1 , .Followers-container1{
 	background-color: #fff;
-	height:220px;
-	width:45%;
-	justify-content: space-around;
-	margin-bottom: 20px;
-	margin-right: 25px;
+	width:48%;
+	justify-content: space-between;
+	margin: 1%;
 	flex-wrap: wrap;
 }
 .Following-container1-padding, .Followers-container1-padding{
@@ -293,6 +282,7 @@ aside{
 .Following-container1-header, .Followers-container1-header{
 	width:100%;
 	border-radius: 10px;
+	height: 150px;
 }
 .Following-container-body, .Followers-container-body{
 		display: flex;
@@ -309,10 +299,7 @@ aside{
 	top:-25px;
 	padding: 0px 15px 0px 10px;
 }
-.Following-container1-body-inside span, .Followers-container1-body-inside span{
-     position:relative;
-     top:-3px;
-}
+
 .Following-container1-body-inside h3, .Followers-container1-body-inside h3{
      position:relative;
      top:10px;
@@ -320,3 +307,130 @@ aside{
 .Following-container1-footer, .Followers-container1-footer{
 	margin-top: -30px;
 }
+
+.pop{
+	width:100%;
+	height:100vh;
+	position:absolute;
+	top:0;
+	left:0;
+	background-color: rgb(0,0,0,0.6);
+}
+.pop-content{
+	width: 15%;
+	height:auto;
+	background-color: #fff;
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%,-50%);
+	border-radius:20px;
+	color:#1dabdd;
+	text-align:center;
+	padding-top:18px;
+	padding-bottom:18px;
+}
+.pop-heading{
+	text-transform: uppercase;
+	font-weight:bold;
+	font-size:1rem;
+	display:inline;
+	padding-right:30px;
+}
+.pop-body img{
+	margin-top:20px;
+}
+.close{
+	position: relative;
+	/*top:-10%;
+	color:red;*/
+	padding-right: 3px;
+    padding-bottom: 20px;
+}
+.circle{
+    position: relative;
+    display: inline-block;
+}
+.circle .text{
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;  
+    text-align: center;
+    top: 43%;
+    color: #fff;
+    width: 60%;
+	font-size:14px;
+}
+@media only screen and (max-width: 600px) {
+	
+	aside{
+		display:none;
+	}
+	body{
+		font-size:13px;
+	}
+	header{
+		height:200px;
+		padding-bottom:10px;
+	}
+	.header-header {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		height: 20px;
+	}
+	.header-header span {
+		margin-left: 8%;
+	}
+	.header-img {
+		width: 25px;
+		height: 25px;
+		padding-left: 15px;
+		padding-right: 10px;
+	}
+	.header-body{
+		height:125px;
+	}
+	.header-footer div img {
+		width: 80px;
+		height: 80px;
+		margin-top: -5px;
+	}
+	.header-footer-body span {
+		padding-right: 10px;
+	}
+	.header-footer h3 {
+		font-size: 14px;
+	}
+	.header-footer div button {
+		width: 75px;
+		height: 30px;
+		margin-top: 2px;
+	}
+	.header-logout{ 
+		width:75px;
+		height:21px;
+		margin-right:10px;
+	}
+	.button {
+		padding:2px 10px;
+		margin-top: 2px;
+	}
+	.text-property {
+		font-size: 10px;
+	}
+	.container, .header{
+		width: 90%;
+	}
+	#Tweet-container, #Following-container, #Followers-container{
+		width:100%;
+		margin:0;
+	}
+	.Following-container1-header, .Followers-container1-header {
+		height: 100px;
+	}
+	.Following-container1-body-inside h3, .Followers-container1-body-inside h3 {
+		position: relative;
+		top: 10px;
+	}
+} 
