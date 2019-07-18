@@ -71,7 +71,7 @@ function editProfile(event){
 						'Content-Type':'application/json'
 					}
 				}
-		respnse("https://fsd1.herokuapp.com/users/4/profile",init)
+		response("https://fsd1.herokuapp.com/users/4/profile",init)
 			.then(data=>{
 				if((user.user_name==data.user_name)&&(user.user_email==data.user_email)&&(user.user_birthday==data.user_birthday)&&(user.user_from==data.user_from)&&(user.user_website==data.user_website)){
 					document.getElementById("warningMsg").textContent="No change";
