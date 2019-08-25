@@ -30,7 +30,7 @@ function loginMsg(event,email,password){
                 document.getElementById("loginWarningMsg").textContent="Enter valid credentials";
             }
             else{
-                window.location.href="../Twitter Home Page/home.html";
+                window.location.href="home.html";
             }
         })
         .catch(error=>console.log(error));
