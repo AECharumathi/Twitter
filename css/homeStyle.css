@@ -95,6 +95,10 @@ aside{
 	top:-25px;
 	padding: 0px 15px 0px 10px;
 }
+#side-container1-body img{
+	width:75px;
+	heigth:75px;
+}
 #side-container1-body-inside span{
      position:relative;
      top:-15px;
